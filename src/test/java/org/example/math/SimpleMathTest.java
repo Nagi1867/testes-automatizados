@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SimpleMathTest {
+    //test[System Under Test]_[Condition or State Change]_[Expected Result]
     @Test
-    void TestSum() {
+    void TestSum_When_SixDotTwoIsAddedByTwo_ShouldReturnEightDotTwo() {
         SimpleMath math = new SimpleMath();
         double firstNumber = 6.2D;
         double secondNumber = 2D;
@@ -43,6 +44,11 @@ public class SimpleMathTest {
         Double actual = math.division(firstNumber, secondNumber);
         double expected = 3.1D;
         assertEquals(expected, actual, () ->  firstNumber + "/" + secondNumber + " did not produce " + expected);
+    }
+
+    @Test
+    void TestDivision_When_FirstNumberIsDividedByZero_ShouldReturnEightDotThrowArithmeticException() {
+        fail();
     }
 
     @Test
