@@ -1,12 +1,15 @@
 package org.example.math;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Test Math Operations in SimpleMath Class")
 public class SimpleMathTest {
     //test[System Under Test]_[Condition or State Change]_[Expected Result]
     @Test
+    @DisplayName("Test 6.2 + 2 = 8.2")
     void TestSum_When_SixDotTwoIsAddedByTwo_ShouldReturnEightDotTwo() {
         SimpleMath math = new SimpleMath();
         double firstNumber = 6.2D;
@@ -17,6 +20,7 @@ public class SimpleMathTest {
     }
 
     @Test
+    @DisplayName("Subtraction 6.2 - 2 = 4.2")
     void TestSubtraction() {
         SimpleMath math = new SimpleMath();
         double firstNumber = 6.2D;
