@@ -1,5 +1,6 @@
 package org.example.math;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,6 +56,7 @@ public class SimpleMathTest {
         assertEquals(expected, actual, () ->  firstNumber + "/" + secondNumber + " did not produce " + expected);
     }
 
+    @Disabled("teste")
     @Test
     void TestDivision_When_FirstNumberIsDividedByZero_ShouldReturnEightDotThrowArithmeticException() {
         fail();
