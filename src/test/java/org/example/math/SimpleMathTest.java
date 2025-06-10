@@ -10,10 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Test Math Operations in SimpleMath Class")
 public class SimpleMathTest {
-    SimpleMath math = new SimpleMath();
+    SimpleMath math;
 
     @BeforeEach
     void beforeEachMethod() {
+        math = new SimpleMath();
         System.out.println("Running BeforeEach method");
     }
 

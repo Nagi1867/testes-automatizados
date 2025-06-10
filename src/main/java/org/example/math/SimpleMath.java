@@ -15,7 +15,6 @@ public class SimpleMath {
     }
 
     public Double division(Double firstNumber, Double secondNumber) {
-        if (secondNumber.equals(0D)) throw new ArithmeticException();
         return firstNumber / secondNumber;
     }
 
