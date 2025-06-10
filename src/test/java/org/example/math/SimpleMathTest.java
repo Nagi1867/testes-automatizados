@@ -3,6 +3,7 @@ package org.example.math;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -56,13 +57,14 @@ public class SimpleMathTest {
         assertEquals(expected, actual, () ->  firstNumber + "*" + secondNumber + " did not produce " + expected);
     }
 
-    @DisplayName("Test 6.2 / 2 = 3.1")
+    @DisplayName("Test double subtraction [firstNumber, secondNumber, expected]")
     @ParameterizedTest
     //@MethodSource("testDivisionInputParameters")
     //@MethodSource
-    @CsvSource({
-            "6.2, 2, 3.1", "71, 14, 5.07", "18.3, 3.1, 5.90"
-    })
+//    @CsvSource({
+//            "6.2, 2, 3.1", "71, 14, 5.07", "18.3, 3.1, 5.90"
+//    })
+    @CsvFileSource(resources = "/testDivision.csv")
     void TestDivision(double firstNumber, double secondNumber, double expected) {
         Double actual = math.division(firstNumber, secondNumber);
         assertEquals(expected, actual, 2D,() ->  firstNumber + "/" + secondNumber + " did not produce " + expected);
