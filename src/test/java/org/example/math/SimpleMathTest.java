@@ -1,21 +1,35 @@
 package org.example.math;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Test Math Operations in SimpleMath Class")
 public class SimpleMathTest {
+    SimpleMath math = new SimpleMath();
+
+    @BeforeAll
+    static void setup() {
+        System.out.println("Running BeforeAll method");
+    }
+    @AfterAll
+    static void cleanup() {
+        System.out.println("Running AfterAll method");
+    }
+    @BeforeEach
+    void beforeEachMethod() {
+        System.out.println("Running BeforeEach method");
+    }
+    @AfterEach
+    void afterEachMethod() {
+        System.out.println("Running AfterEach method");
+    }
     //test[System Under Test]_[Condition or State Change]_[Expected Result]
     @Test
     @DisplayName("Test 6.2 + 2 = 8.2")
     void TestSum_When_SixDotTwoIsAddedByTwo_ShouldReturnEightDotTwo() {
         //AAA Arrange,Act, Assert
         //Given
-        SimpleMath math = new SimpleMath();
-
         double firstNumber = 6.2D;
         double secondNumber = 2D;
         double expected = 8.2D;
@@ -28,7 +42,6 @@ public class SimpleMathTest {
     @Test
     @DisplayName("Subtraction 6.2 - 2 = 4.2")
     void TestSubtraction() {
-        SimpleMath math = new SimpleMath();
         double firstNumber = 6.2D;
         double secondNumber = 2D;
         Double actual = math.subtraction(firstNumber, secondNumber);
@@ -38,7 +51,6 @@ public class SimpleMathTest {
 
     @Test
     void TestMultiplication() {
-        SimpleMath math = new SimpleMath();
         double firstNumber = 6.2D;
         double secondNumber = 2D;
         Double actual = math.multiplication(firstNumber, secondNumber);
@@ -48,7 +60,6 @@ public class SimpleMathTest {
 
     @Test
     void TestDivision() {
-        SimpleMath math = new SimpleMath();
         double firstNumber = 6.2D;
         double secondNumber = 2D;
         Double actual = math.division(firstNumber, secondNumber);
@@ -64,7 +75,6 @@ public class SimpleMathTest {
 
     @Test
     void TestMean() {
-        SimpleMath math = new SimpleMath();
         double firstNumber = 6.2D;
         double secondNumber = 2D;
         Double actual = math.mean(firstNumber, secondNumber);
@@ -74,7 +84,6 @@ public class SimpleMathTest {
 
     @Test
     void TestSquareRoot() {
-        SimpleMath math = new SimpleMath();
         double firstNumber = 81D;
         Double actual = math.squareRoot(firstNumber);
         double expected = 9D;
