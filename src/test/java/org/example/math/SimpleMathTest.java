@@ -2,10 +2,7 @@ package org.example.math;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.util.stream.Stream;
 
@@ -19,10 +16,14 @@ public class SimpleMathTest {
     void beforeEachMethod() {
         System.out.println("Running BeforeEach method");
     }
-    @AfterEach
-    void afterEachMethod() {
-        System.out.println("Running AfterEach method");
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Pele", "Senna", "Keith Moon"})
+    void testValueSource(String firstName) {
+        System.out.println(firstName);
+        assertNotNull(firstName);
     }
+
     //test[System Under Test]_[Condition or State Change]_[Expected Result]
     @Test
     @DisplayName("Test 6.2 + 2 = 8.2")
