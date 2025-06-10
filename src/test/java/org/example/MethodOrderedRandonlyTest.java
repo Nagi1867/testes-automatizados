@@ -4,7 +4,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-@TestMethodOrder(MethodOrderer.Random.class)
+@TestMethodOrder(MethodOrderer.MethodName.class)
 class MethodOrderedRandOnlyTest {
     @Test
     void testA() {
@@ -13,5 +13,9 @@ class MethodOrderedRandOnlyTest {
     @Test
     void testB() {
         System.out.println("B");
+    }
+    @Test
+    void testC() {
+        System.out.println("C");
     }
 }
