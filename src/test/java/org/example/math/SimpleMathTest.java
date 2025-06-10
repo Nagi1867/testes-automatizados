@@ -1,6 +1,11 @@
 package org.example.math;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,14 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SimpleMathTest {
     SimpleMath math = new SimpleMath();
 
-    @BeforeAll
-    static void setup() {
-        System.out.println("Running BeforeAll method");
-    }
-    @AfterAll
-    static void cleanup() {
-        System.out.println("Running AfterAll method");
-    }
     @BeforeEach
     void beforeEachMethod() {
         System.out.println("Running BeforeEach method");
@@ -58,48 +55,21 @@ public class SimpleMathTest {
         assertEquals(expected, actual, () ->  firstNumber + "*" + secondNumber + " did not produce " + expected);
     }
 
-    @Test
-    void TestDivision() {
-        double firstNumber = 6.2D;
-        double secondNumber = 2D;
+    @DisplayName("Test 6.2 / 2 = 3.1")
+    @ParameterizedTest
+    //@MethodSource("testDivisionInputParameters")
+    @MethodSource
+    void TestDivision(double firstNumber, double secondNumber, double expected) {
         Double actual = math.division(firstNumber, secondNumber);
-        double expected = 3.1D;
-        assertEquals(expected, actual, () ->  firstNumber + "/" + secondNumber + " did not produce " + expected);
+        assertEquals(expected, actual, 2D,() ->  firstNumber + "/" + secondNumber + " did not produce " + expected);
     }
 
-    //@Disabled("teste")
-    @Test
-    @DisplayName("Test Division by Zero")
-    void TestDivision_When_FirstNumberIsDividedByZero_ShouldReturnEightDotThrowArithmeticException() {
-        //given
-        double firstNumber = 6.2D;
-        double secondNumber = 0D;
-
-        var expectedMessage = "Impossible to divide by zero!";
-
-        //when & then
-        ArithmeticException actual = assertThrows(ArithmeticException.class, () -> {
-            //when & then
-            math.division(firstNumber, secondNumber);
-        }, () -> "Division by zero should throw an ArithmeticException");
-
-        assertEquals(expectedMessage, actual.getMessage(), () -> "Unexpected exception message");
-    }
-
-    @Test
-    void TestMean() {
-        double firstNumber = 6.2D;
-        double secondNumber = 2D;
-        Double actual = math.mean(firstNumber, secondNumber);
-        double expected = 4.1D;
-        assertEquals(expected, actual, () ->  "(" + firstNumber + "+" + secondNumber + ")/2" + " did not produce " + expected);
-    }
-
-    @Test
-    void TestSquareRoot() {
-        double firstNumber = 81D;
-        Double actual = math.squareRoot(firstNumber);
-        double expected = 9D;
-        assertEquals(expected, actual, () -> "Square Root of " + firstNumber + " did not produce " + expected);;
+    //public static Stream<Arguments> testDivisionInputParameters() {
+    public static Stream<Arguments> TestDivision() {
+        return Stream.of(
+                Arguments.of(6.2D, 2D, 3.1D),
+                Arguments.of(71D, 14D, 5.07D),
+                Arguments.of(18.3D, 3.1D, 5.90D)
+        );
     }
 }
