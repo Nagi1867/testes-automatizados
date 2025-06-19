@@ -4,6 +4,7 @@ import org.example.service.CourseService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,11 +65,18 @@ class CourseBusinessMockWithBDDTest {
     @DisplayName("Delete Courses not Related to Spring Using Mockito should call Method V2")
     @Test
     void DeleteCoursesNotRelatedToSpring_UsingMockitoVerify_Should_CallMethod_deleteCourseV2() {
+
+        courses = Arrays.asList(
+                "Docker para Amazon AWS Implante Apps Java e .NET com Travis CI"
+        );
         given(mockService.retrieveCourses("Gabriel")).willReturn(courses);
+
+        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
 
         business.deleteCoursesNotRelatedToSpring("Gabriel");
 
-        then(mockService).should().deleteCourse("Docker do Zero à Maestria - Contêinerização Desmistificada");
-        then(mockService).should(never()).deleteCourse("Microsserviços do 0 com Spring Cloud, Spring Boot e Docker");
+
+        then(mockService).should(times(7)).deleteCourse(argumentCaptor.capture());
+        assertThat(argumentCaptor.getAllValues().size(), is(7));
     }
 }
