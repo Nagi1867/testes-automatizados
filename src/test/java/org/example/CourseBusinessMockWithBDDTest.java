@@ -12,6 +12,7 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 class CourseBusinessMockWithBDDTest {
@@ -58,5 +59,16 @@ class CourseBusinessMockWithBDDTest {
         verify(mockService, times(1)).deleteCourse("Docker do Zero à Maestria - Contêinerização Desmistificada");
         verify(mockService, atLeastOnce()).deleteCourse("Docker do Zero à Maestria - Contêinerização Desmistificada");
         verify(mockService, never()).deleteCourse("Microsserviços do 0 com Spring Cloud, Spring Boot e Docker");
+    }
+
+    @DisplayName("Delete Courses not Related to Spring Using Mockito should call Method V2")
+    @Test
+    void DeleteCoursesNotRelatedToSpring_UsingMockitoVerify_Should_CallMethod_deleteCourseV2() {
+        given(mockService.retrieveCourses("Gabriel")).willReturn(courses);
+
+        business.deleteCoursesNotRelatedToSpring("Gabriel");
+
+        then(mockService).should().deleteCourse("Docker do Zero à Maestria - Contêinerização Desmistificada");
+        then(mockService).should(never()).deleteCourse("Microsserviços do 0 com Spring Cloud, Spring Boot e Docker");
     }
 }
