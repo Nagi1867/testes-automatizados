@@ -1,14 +1,25 @@
-package org.example.stubs;
+package org.example;
 
 import org.example.service.CourseService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class CouseServiceStub implements CourseService {
-    @Override
-    public List<String> retrieveCourses(String student) {
-        return Arrays.asList(
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
+class CourseBusinessMockTest {
+    CourseService mockService;
+    CourseBusiness business;
+    List<String> courses;
+
+    @BeforeEach
+    void setup() {
+        mockService = mock(CourseService.class);
+        business = new CourseBusiness(mockService);
+        courses = Arrays.asList(
                 "REST API's RESTFul do 0 à Azure com ASP.NET Core 5 e Docker",
                 "Agile Desmistificado com Scrum, XP, Kanban e Trello",
                 "Spotify Engineering Culture Desmistificado",
@@ -23,8 +34,12 @@ public class CouseServiceStub implements CourseService {
         );
     }
 
-    @Override
-    public List<String> doSomething(String student) {
-        return List.of();
+    @Test
+    void testCoursesRelatedToSpring_When_UsingAMock() {
+        when(mockService.retrieveCourses("Gabriel")).thenReturn(courses);
+
+        var filteredCourses = business.retrieveCoursesRelatedToSpring("Gabriel");
+
+        assertEquals(4, filteredCourses.size());
     }
 }

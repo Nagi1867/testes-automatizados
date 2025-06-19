@@ -5,7 +5,7 @@ import org.example.stubs.CouseServiceStub;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-class CourseBusinessTest {
+class CourseBusinessStubTest {
     @Test
     void testCoursesRelatedToSpring_When_UsingAStub() {
         CourseService stubService = new CouseServiceStub();
