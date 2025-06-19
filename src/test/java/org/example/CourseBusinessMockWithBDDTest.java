@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.service.CourseService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -11,7 +12,7 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class CourseBusinessMockWithBDDTest {
     CourseService mockService;
@@ -45,5 +46,17 @@ class CourseBusinessMockWithBDDTest {
 
 
         assertThat(filteredCourses.size(), is(4));
+    }
+
+    @DisplayName("Delete Courses not Related to Spring Using Mockito should call Method")
+    @Test
+    void DeleteCoursesNotRelatedToSpring_UsingMockitoVerify_Should_CallMethod_deleteCourse() {
+        given(mockService.retrieveCourses("Gabriel")).willReturn(courses);
+
+        business.deleteCoursesNotRelatedToSpring("Gabriel");
+
+        verify(mockService, times(1)).deleteCourse("Docker do Zero à Maestria - Contêinerização Desmistificada");
+        verify(mockService, atLeastOnce()).deleteCourse("Docker do Zero à Maestria - Contêinerização Desmistificada");
+        verify(mockService, never()).deleteCourse("Microsserviços do 0 com Spring Cloud, Spring Boot e Docker");
     }
 }

@@ -27,4 +27,9 @@ public class CouseServiceStub implements CourseService {
     public List<String> doSomething(String student) {
         return List.of();
     }
+
+    @Override
+    public void deleteCourse(String course) {
+
+    }
 }
